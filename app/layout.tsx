@@ -1,40 +1,36 @@
-import type { Metadata } from "next";
-import { Geist } from "next/font/google";
-import { ThemeProvider } from "next-themes";
-import "./globals.css";
+import { CookieBanner } from "@/components/CookieBanner";
+import './globals.css';
+import { Outfit, JetBrains_Mono } from 'next/font/google';
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
-
-export const metadata: Metadata = {
-  metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
-};
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  display: "swap",
-  subsets: ["latin"],
+const outfit = Outfit({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-outfit',
+  display: 'swap',
 });
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-mono',
+  display: 'swap',
+});
+
+export const metadata = {
+  title: 'Tattoos by Jake Llewellyn — Tattoos by Jake Llewellyn',
+  description: 'Tattoos by Jake Llewellyn — Tattoos by Jake Llewellyn',
+};
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.className} antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+    <html lang="en" className={`${outfit.variable} ${jetbrainsMono.variable}`}>
+      <body className="bg-[#09090B] text-[#FAFAFA] font-sans antialiased min-h-screen selection:bg-[#8B5CF6] selection:text-[#FAFAFA]">
+        {children}
+              <CookieBanner />
       </body>
     </html>
   );
